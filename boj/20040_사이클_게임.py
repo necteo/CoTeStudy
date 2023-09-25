@@ -12,13 +12,14 @@ def find(u):
 def union(x,y):
     p[find(x)] = find(y)
 
-chk = 0
+cnt = 0
 for i in range(m):
     a,b = map(int, input().split())
-    if a < b:
-        union(b,a)
-    else:
-        union(a,b)
+    if a > b:
+        a,b = b,a
+    if find(b) == find(a):
+        cnt = i+1
+        break
+    union(b,a)
 
-if chk == 0:
-    print(0)
+print(cnt)
