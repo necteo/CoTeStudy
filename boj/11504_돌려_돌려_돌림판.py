@@ -13,11 +13,13 @@ for _ in range(int(input())):
         z = 0
         m = len(xl)
         j = i
-        while m >= 0:
+        while m > 0:
             m -= 1
             z += plate[j]*10**m
             if j >= n-1:
-                j = j-n
+                j = j+1-n
             else:
                 j += 1
-        print(z)
+        if x <= z <= y:
+            cnt += 1
+    print(cnt)
