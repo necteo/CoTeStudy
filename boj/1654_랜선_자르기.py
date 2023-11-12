@@ -2,7 +2,7 @@ K, N = map(int, input().split())
 arr = []
 for _ in range(K):
     arr.append(int(input()))
-high = min(arr)
+high = sum(arr)//N
 low = 0
 mid = high
 while low+1 < high:
