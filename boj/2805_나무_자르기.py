@@ -14,3 +14,4 @@ while low+1 < high:
     else:
         high = mid
         mid = (mid+low)//2
+print(mid)
