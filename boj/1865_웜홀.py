@@ -11,20 +11,17 @@ for _ in range(int(input())):
     for i in range(W):
         s, e, t = map(int, input().split())
         g[s].append([e, -t])
-    loop = []
-    for i in range(1, N+1):
-        ans = [sys.maxsize]*(N+1)
-        ans[i] = 0
-        for k in range(N+1):
-            for u in range(1, N+1):
-                if ans[u] == sys.maxsize:
-                    continue
-                for v, w in g[u]:
-                    if ans[v] > ans[u] + w:
-                        ans[v] = ans[u] + w
-            if k == N:
-                loop.append(True)
-    if True in loop:
+    ans = [100000000]*(N+1)
+    ans[1] = 0
+    loop = False
+    for k in range(N):
+        for u in range(1, N+1):
+            for v, w in g[u]:
+                if ans[v] > ans[u] + w:
+                    ans[v] = ans[u] + w
+                    if k == N-1:
+                        loop = True
+    if loop:
         print("YES")
     else:
         print("NO")
