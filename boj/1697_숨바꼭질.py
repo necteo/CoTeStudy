@@ -16,12 +16,12 @@ def dij(start, end):
         if now == end:
             break
         if now < end:
-            if now != 0 and now * 2 <= MAX:
-                heapq.heappush(q, (dist, now * 2))
+            if now != 0 and now*2 <= MAX:
+                heapq.heappush(q, (dist+1, now*2))
             if now < MAX:
-                heapq.heappush(q, (dist + 1, now + 1))
+                heapq.heappush(q, (dist+1, now+1))
         if now > 0:
-            heapq.heappush(q, (dist + 1, now - 1))
+            heapq.heappush(q, (dist+1, now-1))
 
 dij(N, K)
 print(D[K])
