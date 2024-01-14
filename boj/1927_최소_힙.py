@@ -24,9 +24,7 @@ def pop():
             c = p*2
             if len(minh) > c+1 and minh[c] > minh[c+1]:
                 c += 1
-            if c > len(minh):
-                break
-            if minh[c] > minh[p]:
+            if c >= len(minh) or minh[c] > minh[p]:
                 break
             tmp = minh[c]
             minh[c] = minh[p]
