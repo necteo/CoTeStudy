@@ -13,9 +13,7 @@ def dfs(v):
     for u, w in arr[v]:
         if visited[u] == 0:
             d += w
-            ans = max(d, ans)
             dfs(u)
-            d -= w
 
 ans = 0
 d = 0
