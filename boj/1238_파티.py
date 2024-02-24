@@ -1,32 +1,31 @@
-from collections import deque
+import heapq
 import sys
 input = sys.stdin.readline
 N, M, X = map(int, input().split())
-arr = [[] for _ in range(N+1)]
+g = [[] for _ in range(N+1)]
 for _ in range(M):
     a, b, c = map(int, input().split())
-    arr[a].append([b, c])
+    g[a].append([b, c])
 
-def bfs(start, end):
-    visited = [0 for _ in range(N+1)]
-    visited[start] = 1
-    queue = deque()
-    queue.append(start)
-    s = 0
-    while queue:
-        v = queue.popleft()
-        for u, t in arr[v]:
-            if visited[u] == 0:
-                visited[u] = 1
-                s += t
-                if u == end:
-                    return s
-                queue.append(u)
+def dijkstra(start, end):
+    d = [sys.maxsize]*(N+1)
+    q = []
+    heapq.heappush(q, (0, start))
+    d[start] = 0
+
+    while q:
+        t, now = heapq.heappop(q)
+        if d[now] < t:
+            continue
+        for v, w in g[now]:
+            time = d[now]+w
+            if time < d[v]:
+                d[v] = time
+                heapq.heappush(q, (time, v))
+    return d[end]
 
 ans = 0
 for i in range(1, N+1):
     if i != X:
-        total = bfs(i, X)+bfs(X, i)
-        print(total)
-        ans = max(ans, total)
+        ans = max(ans, dijkstra(i, X)+dijkstra(X, i))
 print(ans)
