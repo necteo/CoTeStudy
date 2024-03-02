@@ -7,16 +7,18 @@ for _ in range(V):
     for i in range(1, len(info)-1, 2):
         arr[info[0]].append([info[i], info[i+1]])
 
-def dfs(v):
-    global d, ans
+def dfs(v, d):
+    global ans
     visited[v] = 1
+    ans = max(ans, d)
     for u, w in arr[v]:
         if visited[u] == 0:
-            d += w
-            dfs(u)
+            visited[u] = 1
+            dfs(u, d+w)
+            if w > d:
+                d = w
 
 ans = 0
-d = 0
 visited = [0 for _ in range(V+1)]
-dfs(1)
+dfs(1, 0)
 print(ans)
