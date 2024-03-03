@@ -10,13 +10,17 @@ for _ in range(V):
 def dfs(v, d):
     global ans
     visited[v] = 1
-    ans = max(ans, d)
+    s = [0]
     for u, w in arr[v]:
         if visited[u] == 0:
             visited[u] = 1
-            dfs(u, d+w)
-            if w > d:
-                d = w
+            s.append(dfs(u, w))
+    if len(s) > 1:
+        s.sort()
+        ans = max(ans, s[-2]+s[-1])
+        return d+s[-1]
+    ans = max(ans, d+s[-1])
+    return d+s[-1]
 
 ans = 0
 visited = [0 for _ in range(V+1)]
